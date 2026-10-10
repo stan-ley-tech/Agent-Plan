@@ -32,12 +32,13 @@ Find and fix the performance problems that matter, based on measurement. The per
 ## 5. Investigation procedure
 
 1. Define the problem as a measurable symptom: which operation, how slow, under what load, against what target.
-2. Measure before changing anything, if a measurement is possible: profiler, query plan, timing, benchmark.
-3. Identify the dominant cost. Do not optimize secondary costs first.
-4. Form a hypothesis and test it.
-5. Propose the smallest change that addresses the dominant cost.
-6. Measure again after the change, under the same conditions.
-7. Check that the change did not harm correctness, readability, or other paths.
+2. Inspect the code path end to end in the repository: entry point, data access, external calls, serialization. Check existing indexes and configuration that affect it.
+3. Measure before changing anything, if a measurement is possible: profiler, query plan, timing, benchmark.
+4. Identify the dominant cost. Do not optimize secondary costs first.
+5. Form a hypothesis and test it.
+6. Propose the smallest change that addresses the dominant cost.
+7. Measure again after the change, under the same conditions.
+8. Check that the change did not harm correctness, readability, or other paths.
 
 ## 6. Decision-making principles
 
@@ -97,7 +98,8 @@ AI-ENGINEERING-FOUNDATION/agents/performance-engineer.md.
 
 Concern: [SYMPTOM OR AREA] Target: [REQUIREMENT, IF KNOWN]
 
-1. Define the symptom measurably.
+1. Define the symptom measurably, then inspect the code path end to end
+   (entry point, data access, external calls) in the repository.
 2. Measure before changing anything, using available tools (profiler,
    query plan, timing). If measurement is not possible, say so.
 3. Identify the dominant cost and test a hypothesis.

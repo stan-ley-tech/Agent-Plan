@@ -38,7 +38,7 @@ Not needed for Tier 0 work. Optional for Tier 1.
 2. Inspect the repository and project documents enough to understand context.
 3. Assign a risk tier.
 4. Identify which workflows apply. For each skipped workflow, note the reason in one line.
-5. Identify the roles needed for each workflow step.
+5. Identify the roles needed for each workflow step using "When to involve each specialist" (section 6). Name which specialists are not needed and why.
 6. Identify approval checkpoints.
 7. Produce the plan, then execute it task by task.
 
@@ -53,6 +53,37 @@ Not needed for Tier 0 work. Optional for Tier 1.
   - **Verified** — the result was checked against evidence (test output, diff inspection, independent review).
   Only Verified tasks count as complete.
 - When roles conflict, compare against requirements and principles, choose, and record why. Escalate consequential conflicts to the user.
+
+### When to involve each specialist
+
+Involve a specialist only when its trigger applies. A task that triggers none needs only the Implementation Engineer, plus the Test Engineer for Tier 1+.
+
+| Specialist | Involve when | Skip when |
+| --- | --- | --- |
+| Product Analyst | Requirements are missing, vague, or disputed; new project or new user-facing capability | Acceptance criteria are already clear and approved |
+| Software Architect | New component, integration, or data flow; change crosses module boundaries; new framework or infrastructure proposed | Change stays inside one module's existing responsibility |
+| Database Specialist | Schema change, migration, new query pattern on large data, integrity or concurrency defect | No persistent data is touched |
+| API and Integration Specialist | New or changed interface contract; new external service or webhook; timeout/retry/duplication defects | Internal change with no contract impact |
+| Security Engineer | Any trust boundary touched; authentication, authorization, sensitive data, secrets, payments; all Tier 3 work | Tier 0–1 changes with no trust-boundary impact |
+| Implementation Engineer | Any code change | Pure design, review, or assessment tasks |
+| Test Engineer | Tier 1+ code changes; coverage or flakiness concerns; reverification | Tier 0 |
+| Code Reviewer | Required for Tier 2–3; recommended for Tier 1; reverification of its own findings | Tier 0 |
+| Performance Engineer | Measured or reported slowness or resource problem; performance NFRs; hot paths or large volumes changed | No performance requirement or symptom |
+| DevOps Engineer | Build, CI/CD, environment, container, infrastructure, or deployment configuration changes | Application-only changes with no build or config impact |
+| Documentation Engineer | Setup, configuration, API, architecture, or operational behavior changed | Internal change invisible to readers of any document |
+| Release and Reliability Engineer | Tier 2–3 change heading to production; migrations against production data | Not releasing; Tier 0–1 changes released through an established routine |
+
+### Ownership where roles overlap
+
+| Topic | Owner | Contributing role |
+| --- | --- | --- |
+| Security of a specific diff | Code Reviewer (first pass) | Security Engineer for Tier 3 or trust-boundary changes (in-depth assessment) |
+| Indexes and query design | Database Specialist | Performance Engineer measures and confirms under load |
+| Authorization rules per operation | API and Integration Specialist defines | Security Engineer assesses |
+| Trust boundaries in design | Software Architect identifies | Security Engineer assesses |
+| Rollback mechanism | DevOps Engineer builds | Release and Reliability Engineer judges adequacy |
+| Migration safety | Database Specialist designs | Release and Reliability Engineer verifies readiness |
+| Test strategy for a change | Test Engineer | Implementation Engineer writes tests alongside code |
 
 ## 7. Boundaries
 

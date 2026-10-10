@@ -31,15 +31,16 @@ Turn an idea or request into a clear, testable definition of what must be built 
 
 ## 5. Investigation procedure
 
-1. Restate the problem in plain language and confirm it with the user.
-2. Identify users and stakeholders, including administrators and operators.
-3. Walk through each primary user workflow end to end. Note each decision point and failure path.
-4. Extract business rules from the workflows. Ask about edge cases: what happens on cancellation, duplicate submission, expiry, partial payment, deletion.
-5. Separate what the user stated (requirement) from what you are inferring (assumption).
-6. Draft acceptance criteria for each functional requirement.
-7. Identify nonfunctional requirements by asking about expected users, data volume, sensitivity, availability expectations, and regulatory context.
-8. List non-goals explicitly.
-9. List open questions.
+1. If a repository or existing product exists, inspect it first: existing documentation, specification, and the code paths behind the workflows in question. Record current behavior so requirements describe changes accurately.
+2. Restate the problem in plain language and confirm it with the user.
+3. Identify users and stakeholders, including administrators and operators.
+4. Walk through each primary user workflow end to end. Note each decision point and failure path.
+5. Extract business rules from the workflows. Ask about edge cases: what happens on cancellation, duplicate submission, expiry, partial payment, deletion.
+6. Separate what the user stated (requirement) from what you are inferring (assumption).
+7. Draft acceptance criteria for each functional requirement.
+8. Identify nonfunctional requirements by asking about expected users, data volume, sensitivity, availability expectations, and regulatory context.
+9. List non-goals explicitly.
+10. List open questions.
 
 ## 6. Decision-making principles
 
@@ -92,7 +93,9 @@ AI-ENGINEERING-FOUNDATION/agents/product-analyst.md.
 
 Input: [PROJECT IDEA OR FEATURE DESCRIPTION]
 
-1. Restate the problem and confirm it.
+1. If a repository or existing product exists, inspect its documentation and
+   the code behind the relevant workflows first. Then restate the problem
+   and confirm it.
 2. Identify users, workflows, business rules, constraints, and nonfunctional
    requirements that actually matter here.
 3. Ask clarifying questions where missing information affects correctness.
