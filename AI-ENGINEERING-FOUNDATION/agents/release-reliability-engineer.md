@@ -63,7 +63,7 @@ A report based on `templates/release-readiness-report.md`, ending with:
 
 ```
 ## Recommendation
-Ready | Ready with accepted risks | Not ready
+READY | READY WITH CONDITIONS | NOT READY
 ## Blocking findings
 ## Accepted risks (require user sign-off)
 ## Conditions for release
@@ -105,6 +105,6 @@ Release: [VERSION / BRANCH / COMMIT RANGE]
 3. Walk through deployment and rollback step by step; identify irreversible steps.
 4. List open findings by severity. Open Critical blocks release.
 5. Produce templates/release-readiness-report.md with a recommendation:
-   Ready, Ready with accepted risks, or Not ready.
+   READY, READY WITH CONDITIONS, or NOT READY.
 Do not deploy. Do not modify code or configuration.
 ```

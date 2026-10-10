@@ -6,7 +6,7 @@
 | Target environment | [ENVIRONMENT] |
 | Date | [YYYY-MM-DD] |
 | Assessed by | Release and Reliability Engineer |
-| Recommendation | [Ready / Ready with accepted risks / Not ready] |
+| Recommendation | [READY / READY WITH CONDITIONS / NOT READY] |
 
 This report is a recommendation. It does not authorize deployment.
 
@@ -66,10 +66,12 @@ This report is a recommendation. It does not authorize deployment.
 
 ## 10. Recommendation
 
-**[Ready / Ready with accepted risks / Not ready]**
+**[READY / READY WITH CONDITIONS / NOT READY]**
 
 [Reasoning in two to four sentences.]
 
-Conditions for release:
+Conditions for release (required for READY WITH CONDITIONS):
 
-- [CONDITION]
+| Condition | Evidence | Owner | Deadline (before deploy / time after) |
+| --- | --- | --- | --- |
+| [CONDITION] | [REPORT, FILE, OR OUTPUT] | [NAME] | [DEADLINE] |

@@ -22,6 +22,7 @@ Not needed for Tier 0 work. Optional for Tier 1.
 - Enforce review gates: independent code review, security assessment, reverification.
 - Enforce approval checkpoints defined in `CLAUDE.md`.
 - Resolve conflicts between specialist recommendations explicitly.
+- Control iteration: when work returns to an earlier workflow, record why, which deliverables are invalidated, and which approvals must be repeated (see "Workflow lifecycle" in `README.md`).
 - Maintain accurate task status and `docs/project-status.md`.
 - Report blockers and outstanding risks to the user.
 

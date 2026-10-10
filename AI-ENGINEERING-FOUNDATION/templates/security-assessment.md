@@ -61,6 +61,7 @@ Severity levels and evidence labels: see `principles/engineering-standards.md`.
 - Evidence detail: [CODE REFERENCE, TOOL OUTPUT, OR REPRODUCTION STEPS — NEVER SECRET VALUES]
 - Impact: [CONSEQUENCE IF EXPLOITED]
 - Remediation: [SPECIFIC FIX]
+- Verification requirement: [HOW THE FIX WILL BE PROVEN, e.g. "AUTOMATED TEST: OTHER TENANT'S RECORD RETURNS 404"]
 - Status: [Open / Fix attempted / Reverified / Accepted risk]
 
 ## 8. Tools run

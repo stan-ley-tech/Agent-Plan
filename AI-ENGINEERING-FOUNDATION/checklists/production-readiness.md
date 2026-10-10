@@ -51,5 +51,5 @@ Use with Workflow 12. Every item needs evidence specific to this release scope. 
 ## Decision
 
 - [ ] Blockers listed.
-- [ ] Recommendation stated: Ready, Ready with accepted risks, or Not ready.
+- [ ] Outcome stated: READY, READY WITH CONDITIONS, or NOT READY; every blocker and condition cites evidence.
 - [ ] Deployment awaits explicit user authorization.

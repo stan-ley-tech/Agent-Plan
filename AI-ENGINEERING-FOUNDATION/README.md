@@ -41,6 +41,24 @@ Paths such as `workflows/06-implementation.md` are relative to the foundation fo
 
 A prompt starts a task. The prompt names the workflows. Workflows name the agent roles and the templates. Agents apply the principles. Checklists close each phase.
 
+## Workflow lifecycle
+
+```
+01 Project Discovery → 02 Requirements & Scope → 03 Architecture & Planning
+→ 04 Data & API Design → 05 Security Assessment → 06 Implementation
+→ 07 Testing & Verification → 08 Independent Code Review
+→ 09 Remediation & Reverification → 10 Documentation
+→ 11 DevOps & Deployment Planning → 12 Production Readiness
+```
+
+This is the default order, not a strict sequence:
+
+- **Scale to risk.** Tier 0–1 work typically uses only 06–07 (and 08 for Tier 1 when warranted). See the risk tiers in `principles/engineering-standards.md`.
+- **Some workflows recur.** 05 runs at design level before 06 and at code level before 12. 10 runs whenever documented behavior changes. 11 can start right after 03 so environments and CI exist early.
+- **Return to an earlier workflow when its outputs are no longer true**: requirements change (02), architecture or boundaries change (03), data or contracts change (04), new risks appear (05), implementation exposes a wrong assumption, or testing or security findings reveal a design problem.
+
+Controlled iteration: when work returns to an earlier workflow, the Engineering Orchestrator records why, which deliverables are now invalid, and which approvals must be repeated. Work downstream of an invalidated deliverable pauses until it is re-approved.
+
 ## Agent roles vs. Claude Code subagents
 
 The files in `agents/` are role instructions. They can be used in three ways:

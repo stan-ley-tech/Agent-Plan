@@ -46,12 +46,12 @@ Quality and safety:
 Deliverables:
 - docs/reviews/release-readiness-[VERSION].md from
   templates/release-readiness-report.md, ending with a recommendation:
-  Ready, Ready with accepted risks, or Not ready, plus blockers and
+  READY, READY WITH CONDITIONS, or NOT READY, plus blockers and
   conditions for release.
 
 Verification:
 - Every area cites evidence for this release scope.
 
-The deployment decision is mine. A "Ready" recommendation is not
+The deployment decision is mine. A READY outcome is not
 authorization to deploy.
 ```
