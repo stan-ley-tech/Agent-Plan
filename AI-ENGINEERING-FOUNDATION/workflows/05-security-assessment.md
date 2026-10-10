@@ -97,7 +97,7 @@ A report in `docs/reviews/` from `templates/security-assessment.md`. Every findi
 | Impact | Consequence if exploited |
 | Remediation | Specific fix |
 | Verification requirement | How the fix will be proven, e.g. "request for another tenant's invoice returns 404; covered by an automated test" |
-| Status | Open / Fix attempted / Reverified / Accepted risk |
+| Status | Open / Fix attempted / Reverified / Disputed / Accepted risk |
 
 Design-level mode also produces security requirements to feed into the specification and implementation plan.
 

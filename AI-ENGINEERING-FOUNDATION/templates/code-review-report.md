@@ -29,14 +29,15 @@ Most severe first.
 
 | | |
 | --- | --- |
-| Severity | [Critical / High / Medium / Low / Info] |
-| Evidence | [Verified / Likely / Unverified concern] |
+| Category | [Confirmed issue / Risk / Suggestion / Question] |
+| Severity | [Critical / High / Medium / Low / Info — confirmed issues and risks] |
+| Evidence | [Verified / Likely / Unverified concern / Recommendation / Open question] |
 
-- Problem: [WHAT IS WRONG]
+- Problem: [WHAT IS WRONG, OR THE QUESTION]
 - Evidence detail: [REASONING TRACE, FAILING INPUT, OR OUTPUT]
 - Impact: [CONSEQUENCE]
 - Recommended fix: [SPECIFIC CHANGE]
-- Verification status: [Open / Fix attempted / Reverified]
+- Verification status: [Open / Fix attempted / Reverified / Disputed / Accepted risk]
 
 ## 4. Checks run
 

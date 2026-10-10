@@ -68,6 +68,7 @@ A report based on `templates/code-review-report.md`:
 Commit range or diff, files.
 ## Findings (most severe first)
 ### [SEV] Title — path/to/file:line
+Category: Confirmed issue | Risk | Suggestion | Question
 Evidence label:
 Problem:
 Impact:

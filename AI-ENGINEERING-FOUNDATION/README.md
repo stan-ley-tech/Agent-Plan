@@ -24,18 +24,16 @@ It is language-, framework-, and industry-neutral. Project specifics come from t
 
 ## How the documents fit together
 
-```
-CLAUDE.md                 always-on rules; points to everything else
-  │
-  ├── principles/         the standards every decision is judged against
-  ├── workflows/          what to do, in order, for each phase
-  │     └── names the agents/ to use in each step
-  ├── agents/             how each specialist role thinks, works, and reports
-  ├── templates/          the shape of the documents workflows produce
-  ├── checklists/         a final pass to catch omissions
-  └── prompts/            what you paste into Claude Code to start a task;
-                          each prompt references the workflows and principles
-```
+`CLAUDE.md` holds the always-on rules and points into six layers. Each layer builds on the ones above it and never redefines them:
+
+| Layer | Answers | Contents |
+| --- | --- | --- |
+| `principles/` | How should decisions be made? | Standards, security principles, code quality, decision method; the shared definitions |
+| `agents/` | Who is responsible? | Thirteen specialist roles: responsibilities, boundaries, output formats |
+| `workflows/` | How is the activity performed? | Twelve staged procedures; each names its agents, deliverables, templates, and checklist |
+| `prompts/` | How do I start it with an AI? | Fourteen copy-ready entry points that route a task to the right workflows |
+| `templates/` | What does it produce? | The project documents and reports written to `docs/` |
+| `checklists/` | Is the stage actually done? | Evidence-based gates that close each stage |
 
 Paths such as `workflows/06-implementation.md` are relative to the foundation folder. Paths starting with `docs/` refer to the project's own documents.
 
@@ -109,7 +107,16 @@ Project-specific outputs (specification, architecture, ADRs, status, reports) go
 
 Keep one master copy (this repository). Improve it here, then copy updates into projects.
 
-- **Definitions live in one place.** Risk tiers, evidence labels, and severity levels are defined only in `principles/engineering-standards.md`. Approval requirements are defined in `CLAUDE.md`. Other documents reference them; do not restate them differently.
+- **Definitions live in one place.** Other documents reference them; do not restate them differently.
+
+  | Definition | Source |
+  | --- | --- |
+  | Risk tiers, evidence labels, severity levels | `principles/engineering-standards.md` |
+  | Approval requirements | `CLAUDE.md` |
+  | When to involve each specialist; task states (Requested / Reported / Verified) | `agents/engineering-orchestrator.md` |
+  | Review verdicts | `workflows/08-independent-code-review.md` |
+  | Finding states (Open / Fix attempted / Reverified / Disputed / Accepted risk) | `workflows/09-remediation-and-reverification.md` |
+  | Readiness outcomes (READY / READY WITH CONDITIONS / NOT READY) and their rules | `workflows/12-production-readiness.md` |
 - **Change names everywhere at once.** If you rename or move a file, search all documents for references and update them in the same change.
 - **Keep the role boundaries distinct.** When adding responsibility to one agent, check it does not duplicate another agent's responsibility.
 - **Keep it neutral.** Stack-specific guidance belongs in the project's own `CLAUDE.md`, not here.

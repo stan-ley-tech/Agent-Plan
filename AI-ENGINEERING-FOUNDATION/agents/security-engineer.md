@@ -76,7 +76,7 @@ Attack scenario: who could do what, how
 Impact: what happens if exploited
 Remediation: specific fix
 Verification requirement: how the fix will be proven
-Status: Open | Fix attempted | Reverified | Accepted risk
+Status: Open | Fix attempted | Reverified | Disputed | Accepted risk
 ```
 
 Followed by: scope assessed, scope not assessed, residual risks.

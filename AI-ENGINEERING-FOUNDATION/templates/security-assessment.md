@@ -62,7 +62,7 @@ Severity levels and evidence labels: see `principles/engineering-standards.md`.
 - Impact: [CONSEQUENCE IF EXPLOITED]
 - Remediation: [SPECIFIC FIX]
 - Verification requirement: [HOW THE FIX WILL BE PROVEN, e.g. "AUTOMATED TEST: OTHER TENANT'S RECORD RETURNS 404"]
-- Status: [Open / Fix attempted / Reverified / Accepted risk]
+- Status: [Open / Fix attempted / Reverified / Disputed / Accepted risk]
 
 ## 8. Tools run
 

@@ -14,7 +14,7 @@ Scale the process to the risk. The orchestrator assigns a tier at the start of e
 | --- | --- | --- |
 | **0 — Trivial** | Typo, comment, copy text, formatting, a dependency patch bump with no behavior change | Make the change. Run the fastest relevant check. No specialist roles. |
 | **1 — Standard** | Contained bug fix, small feature inside an existing module, test additions | Workflow 06 and 07. Self-review against `checklists/implementation.md`. Independent review recommended. |
-| **2 — Significant** | New feature spanning modules, schema change, new API endpoint, new dependency, behavior change visible to users or clients | Requirements confirmed. Data/API design where relevant. Workflows 06–09. Independent code review required. Security review if any trust boundary is touched. |
+| **2 — Significant** | New feature spanning modules, schema change, new API endpoint, new dependency, behavior change visible to users or clients | Requirements confirmed. Data/API design where relevant. Workflows 06–09. Independent code review required. Security review if any trust boundary is touched. Release readiness (12) before a production release. |
 | **3 — High risk** | Authentication, authorization, payments, personal or regulated data, cryptography, destructive migrations, multi-tenant isolation, infrastructure or production configuration | Full design (02–05) with approval. Independent security assessment and code review required. Release readiness (12) before shipping. User approval at each checkpoint. |
 
 When unsure between two tiers, choose the higher one and say why.

@@ -9,7 +9,7 @@ Find the actual root cause of a reported defect, fix it with the smallest correc
 
 ## 2. When to Use
 
-Use when something behaves differently from what it should.
+Use when something behaves differently from what it should, including after a production incident once service is restored (root cause and prevention). Restoring service in production — rollback, restarts, configuration changes — is an operational action that requires your explicit authorization; this prompt does not perform it.
 
 Use something else when:
 

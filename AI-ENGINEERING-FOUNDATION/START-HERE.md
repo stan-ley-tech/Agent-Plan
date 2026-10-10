@@ -34,6 +34,16 @@ The short version. Read `README.md` later if you want the full picture.
 
 The rest are listed in `README.md`.
 
+## How a task moves through the foundation
+
+1. **Pick a prompt** for the task (tables above and in `README.md`), fill in its context fields, and paste its instruction block.
+2. **The prompt routes to workflows.** Claude Code follows the workflows the prompt names, scaled to the task's risk tier. You do not run all twelve for every task.
+3. **Workflows assign roles.** Each workflow names the `agents/` roles involved. Claude Code performs them as roles, or through real subagents if you have configured them.
+4. **Artifacts are written from templates** into the project's `docs/`: specification, architecture, ADRs, plan, status, and reports.
+5. **Checklists close each stage.** A stage is done when its checklist is ticked with evidence, not when the work "looks done".
+6. **Findings loop back.** Review, testing, and security findings go through remediation and reverification before the work counts as complete.
+7. **Production readiness is the last gate.** `prompts/production-readiness.md` returns READY, READY WITH CONDITIONS, or NOT READY. Deploying is still your decision.
+
 ## Things to know
 
 - **You do not paste the agent definitions.** Prompts reference the foundation files by path. Claude Code reads them from the repository.
