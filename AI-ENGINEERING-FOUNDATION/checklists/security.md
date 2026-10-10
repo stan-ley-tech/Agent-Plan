@@ -1,61 +1,82 @@
 # Checklist: Security
 
-Apply only the sections relevant to the application and its risk profile. Mark items N/A with a reason. Passing this checklist does not mean the application is secure.
+Gate for `workflows/05-security-assessment.md` and `prompts/security-review.md`. Apply only the sections relevant to the application and its deployment context.
 
-## Context
+**Rules:** tick `[x]` only with evidence (file:line, tool output, test result). Mark items that do not apply `N/A — reason`. "Reviewed" means inspected in the actual code or configuration, not assumed. Passing this checklist does not mean the system is secure.
 
-- [ ] Assets, their sensitivity, and the deployment context are identified.
-- [ ] Trust boundaries and entry points are listed.
+## Required — Threat Model
 
-## Authentication
+- [ ] Scope, deployment context, and assessment depth stated
+- [ ] Assets identified, with sensitivity
+- [ ] Actors identified (legitimate users, administrators, attackers)
+- [ ] Trust boundaries identified
+- [ ] Attack surfaces identified (entry points enumerated from the code)
+- [ ] Abuse cases by legitimate users considered
 
-- [ ] Uses an established library or platform service; no custom crypto or password handling.
-- [ ] Credentials are hashed with a current, appropriate algorithm (handled by the library).
-- [ ] Session or token expiry, revocation, and secure cookie attributes are configured.
-- [ ] Brute-force and credential-stuffing protections exist where the risk warrants.
+## Conditional — Authentication (if the system authenticates anyone)
 
-## Authorization
+- [ ] Authentication requirements defined
+- [ ] Credential handling reviewed (established library; no custom hashing or crypto)
+- [ ] Session/token handling reviewed (lifetime, revocation, storage, cookie attributes)
+- [ ] Account lifecycle considered (creation, recovery, lockout, deactivation)
 
-- [ ] Every protected operation checks permission on the server.
-- [ ] Access is checked per resource (ownership / tenant), not only per route.
-- [ ] Default is deny; new endpoints are protected unless explicitly public.
-- [ ] Administrative functions are separately protected.
+## Conditional — Authorization (if any operation is restricted)
 
-## Input and output
+- [ ] Permissions defined per operation
+- [ ] Resource ownership checked server-side (object-level and tenant-level)
+- [ ] Privilege escalation considered
+- [ ] Administrative operations protected
+- [ ] Default is deny for new operations
 
-- [ ] Input is validated at trust boundaries (type, length, format, range).
-- [ ] Queries, commands, and paths use parameterized or safe APIs.
-- [ ] Output is encoded for its context.
-- [ ] File uploads are validated by content and size and stored safely.
+## Required — Input/Data
 
-## Data exposure
+- [ ] Input validation reviewed at trust boundaries
+- [ ] Injection risks reviewed (query, command, template, path, deserialization, SSRF, XSS)
+- [ ] Sensitive data identified
+- [ ] Sensitive data exposure reviewed (responses, logs, errors, analytics)
+- [ ] Encryption requirements reviewed (in transit; at rest where needed)
 
-- [ ] Responses return only the fields the caller needs.
-- [ ] Sensitive data is excluded from logs, error messages, and analytics.
-- [ ] Data is encrypted in transit; at rest where sensitivity requires.
-- [ ] Retention and deletion are defined for sensitive data.
+## Conditional — Application/API (if the system exposes interfaces)
 
-## Secrets
+- [ ] API authentication reviewed
+- [ ] API authorization reviewed
+- [ ] Rate limiting considered
+- [ ] Error responses reviewed (no stack traces or internals)
+- [ ] CORS/CSRF considerations reviewed — where browsers are clients
+- [ ] File upload handling reviewed — where uploads exist
 
-- [ ] No secrets in code, configuration files, tests, documentation, or history.
-- [ ] Secrets are loaded from the environment or a secret manager.
-- [ ] Any exposed secret has been reported for rotation.
+## Required — Dependencies/Infrastructure
 
-## Dependencies
+- [ ] Dependencies reviewed (audit tool run if available; results recorded; reachability assessed)
+- [ ] Secrets reviewed (none in code, history, logs, or CI output; locations reported, values never printed)
+- [ ] Configuration reviewed (debug off, safe defaults, no default credentials)
 
-- [ ] Audit tool run if available; actual results recorded.
-- [ ] Vulnerable dependencies assessed for reachability and prioritized.
-- [ ] Versions are locked.
+## Conditional — Dependencies/Infrastructure (if deployed)
 
-## Configuration
+- [ ] Production configuration reviewed
+- [ ] Network exposure reviewed (exposed services, admin interfaces, CI token scope)
 
-- [ ] Debug and verbose error modes off outside development.
-- [ ] CORS, security headers, and cookie settings are deliberate.
-- [ ] No default credentials or exposed admin interfaces.
+## Required — Observability
 
-## Abuse and operations
+- [ ] Security-relevant events logged (actor, action, target, time)
+- [ ] Logs avoid sensitive information
+- [ ] Audit requirements considered
 
-- [ ] Abuse cases considered (enumeration, scraping, resource exhaustion, business-logic abuse).
-- [ ] Rate limiting where abuse is plausible.
-- [ ] Security-relevant events are logged with actor, action, target, and time.
-- [ ] Least privilege applied to service accounts, database roles, and CI tokens.
+## Verification
+
+- [ ] Security tests executed where applicable (negative authorization, validation); results recorded
+- [ ] Tools not run are listed with the reason
+- [ ] Findings documented in `templates/security-assessment.md`
+- [ ] Each finding has severity, evidence, impact, affected area, remediation, and verification method
+- [ ] Unverified concerns kept separate from evidenced findings
+- [ ] Remediation verified (Workflow 09) for every finding marked Reverified
+
+**Final Status**
+
+```text
+Findings: Critical __  High __  Medium __  Low __  Info __
+Critical/High reported to user: YES / NO / NONE FOUND
+Scope not assessed:
+Unticked items and reasons:
+Report location:
+```

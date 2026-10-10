@@ -1,57 +1,85 @@
 # Checklist: Code Review
 
-Final sweep after reading the diff in context. It does not replace tracing the code. Mark items N/A with a reason.
+Gate for `workflows/08-independent-code-review.md` and `prompts/code-review.md`. Use as a final sweep after reading the diff in context; it does not replace tracing the code.
 
-## Independence and scope
+**Rules:** tick `[x]` only after inspecting the actual diff and surrounding code. Mark items that do not apply `N/A — reason`. "Looks good" is not a review result: every concern is recorded as a finding with evidence, or the item is left unticked.
 
-- [ ] Reviewer is not the author.
-- [ ] Diff obtained directly from version control.
-- [ ] Requirements read before code.
-- [ ] Change stays within approved scope.
+## Required — Independence
 
-## Correctness
+- [ ] Reviewer is not the author (or the lack of independence is stated in the report)
+- [ ] Diff obtained directly from version control
+- [ ] Requirements read before the code
 
-- [ ] Main path meets each acceptance criterion.
-- [ ] Error paths and edge cases behave correctly.
-- [ ] Concurrent execution does not cause incorrect results.
+## Required — Correctness
 
-## Regressions and compatibility
+- [ ] Requirements satisfied (each acceptance criterion checked against the code)
+- [ ] Behavior correct on main paths
+- [ ] Edge cases handled
+- [ ] Failure paths handled
+- [ ] Callers and consumers of changed code still work (no regressions)
 
-- [ ] Callers and consumers of changed code still work.
-- [ ] API, schema, configuration, and file-format changes are compatible or approved as breaking.
+## Required — Architecture
 
-## Security
+- [ ] Changes fit the existing architecture and boundaries
+- [ ] Responsibilities are appropriate
+- [ ] Unnecessary coupling avoided
+- [ ] Unnecessary complexity avoided (speculative abstractions, unused options, filler)
 
-- [ ] Authorization checked for each protected operation, including resource ownership.
-- [ ] Input validated at boundaries; no injection paths.
-- [ ] No sensitive data exposed in responses, logs, or errors.
-- [ ] No secrets introduced.
+## Required — Code Quality
 
-## Data integrity
+- [ ] Code is understandable
+- [ ] Duplication is justified/controlled
+- [ ] Error handling is appropriate (nothing swallowed, nothing leaked across boundaries)
+- [ ] Abstractions are justified
+- [ ] Naming is clear and uses domain terms
+- [ ] Style issues raised only where they break an established project standard
 
-- [ ] Transactions wrap operations that must be atomic.
-- [ ] Constraints enforce invariants.
-- [ ] Migrations are safe for existing data and correctly ordered.
+## Conditional — Security (if the change touches inputs, access, data, or configuration)
 
-## Error handling
+- [ ] Authentication reviewed
+- [ ] Authorization reviewed, including resource ownership
+- [ ] Input validation reviewed
+- [ ] Sensitive data handling reviewed
+- [ ] Secrets reviewed (none introduced)
+- [ ] Security regressions considered
+- [ ] Security Engineer review requested — for Tier 3 or trust-boundary changes
 
-- [ ] No swallowed errors.
-- [ ] Errors are translated appropriately at boundaries.
+## Conditional — Database/API (if schema or contracts change)
 
-## Maintainability
+- [ ] Migrations safe for existing data; reversibility and ordering stated
+- [ ] Transactions and constraints protect integrity
+- [ ] Contract changes compatible, or breaking change approved
 
-- [ ] Code is readable and consistent with the codebase.
-- [ ] No unnecessary abstractions, speculative options, narrating comments, or dead code.
-- [ ] Duplication is reasonable.
+## Conditional — Performance (if hot paths or large data are touched)
 
-## Tests
+- [ ] Expensive operations reviewed
+- [ ] Database queries reviewed (N+1, unbounded, missing indexes)
+- [ ] Network calls reviewed (timeouts, sequential calls)
+- [ ] Concurrency considerations reviewed
+- [ ] Unnecessary work identified
 
-- [ ] Tests exercise new behavior and would fail if it broke.
-- [ ] Failure paths are tested in proportion to risk.
-- [ ] No tests weakened, skipped, or deleted without justification.
-- [ ] Tests and checks were run by the reviewer, or their absence is noted.
+## Required — Testing
 
-## Report
+- [ ] Tests cover important behavior
+- [ ] Regression coverage exists where needed
+- [ ] Tests are meaningful (would fail if the behavior broke)
+- [ ] No tests weakened, skipped, or deleted without justification
+- [ ] Tests and checks run by the reviewer; actual results recorded (or "not run" with reason)
 
-- [ ] Every finding has severity, evidence label, file and line, impact, and fix.
-- [ ] Verdict follows from findings.
+## Final Review
+
+- [ ] Findings categorized: confirmed issues / risks / suggestions / questions
+- [ ] Severity assigned to every confirmed issue
+- [ ] Evidence recorded (file:line, trace, failing input, or output)
+- [ ] Unresolved issues documented
+- [ ] Recommendation recorded: Approve / Approve with minor findings / Changes required / Blocked
+
+**Final Status**
+
+```text
+Verdict:
+Open Critical/High: __ (any open → Changes required or Blocked)
+Independence approach: SUBAGENT / SEPARATE SESSION / SEPARATE PASS
+Checks run and results:
+Report location:
+```

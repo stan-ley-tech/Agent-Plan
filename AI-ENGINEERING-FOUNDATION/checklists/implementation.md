@@ -1,47 +1,69 @@
 # Checklist: Implementation
 
-Self-review before handing a change to testing and independent review. Mark items N/A with a reason when they do not apply.
+Gate for `workflows/06-implementation.md`. Use the Before Coding section before the first change, and the rest as the self-review before handing off to testing and independent review.
 
-## Scope
+**Rules:** tick `[x]` only with evidence (file, diff, command output). Mark items that do not apply `N/A — reason`. Unticked items go under Final Status. The implementer's own checklist is not a substitute for independent review.
 
-- [ ] Every change traces to an approved requirement, acceptance criterion, or confirmed defect.
-- [ ] No unrelated refactoring, formatting churn, or opportunistic changes.
-- [ ] No new dependency without justification; major ones approved.
+## Required — Before Coding
 
-## Code quality
+- [ ] Requirements and acceptance criteria understood (IDs or text recorded)
+- [ ] Scope confirmed, including what is out of scope
+- [ ] Risk tier assigned
+- [ ] Architecture reviewed; change fits existing boundaries
+- [ ] Affected components, callers, and consumers identified
+- [ ] Dependencies identified (no new major dependency without approval)
+- [ ] Testing strategy identified
+- [ ] Baseline tests and checks run; pre-existing failures recorded
 
-- [ ] Follows existing project conventions (structure, naming, error handling, tests).
-- [ ] Names use domain terms and reveal intent.
-- [ ] No speculative abstractions, unused options, placeholder code, or narrating comments.
-- [ ] No dead or commented-out code added.
+## Conditional — Before Coding
 
-## Error handling and validation
+- [ ] Database changes identified and designed (Workflow 04) — if schema or data changes
+- [ ] API changes identified and designed; compatibility assessed (Workflow 04) — if contracts change
+- [ ] Security implications identified (Workflow 05) — if a trust boundary, authentication, authorization, secrets, or sensitive data is involved
+- [ ] Breaking changes or destructive migrations approved by the user — if any
 
-- [ ] Each error is handled, translated, or propagated deliberately; none swallowed.
-- [ ] Errors crossing a boundary do not leak internals or secrets.
-- [ ] External input is validated at the trust boundary.
-- [ ] Multi-step writes leave data consistent on failure.
+## Required — During Implementation
 
-## Security
+- [ ] Changes remain within scope
+- [ ] Existing patterns and abstractions are respected and reused
+- [ ] Unnecessary rewrites avoided; diff is proportionate to the task
+- [ ] Error handling implemented deliberately (no swallowed errors)
+- [ ] Validation implemented at trust boundaries
+- [ ] Logging/observability considered, without secrets or unnecessary personal data
+- [ ] No placeholder code presented as complete
 
-- [ ] Authorization is checked for every protected operation, including resource ownership.
-- [ ] No secrets in code, tests, logs, or examples.
-- [ ] No security control weakened.
+## Conditional — During Implementation
 
-## Compatibility
+- [ ] Security controls implemented as designed — if security requirements apply
+- [ ] Migrations handled safely: reversible or flagged, run only locally, deploy ordering stated — if migrations exist
+- [ ] Timeouts, retries, and idempotency implemented per design — if external integrations change
 
-- [ ] Callers and consumers of changed interfaces identified and updated or unaffected.
-- [ ] Migrations are reversible or flagged; ordering with deploy is stated.
-- [ ] Breaking changes approved.
+## Required — Testing
 
-## Tests
+- [ ] Unit tests added/updated
+- [ ] Edge cases tested
+- [ ] Failure paths tested
+- [ ] No tests weakened, skipped, or deleted to obtain a pass
 
-- [ ] Tests demonstrate each acceptance criterion.
-- [ ] Boundary and failure paths covered in proportion to risk.
-- [ ] No tests weakened, skipped, or deleted to obtain a pass.
-- [ ] Relevant tests, type checks, linters, and build run; actual results recorded.
+## Conditional — Testing
 
-## Documentation
+- [ ] Integration tests added/updated — where components interact with real collaborators
+- [ ] Regression tests added — where a defect is being fixed
 
-- [ ] Affected documentation updated, or flagged for Workflow 10.
-- [ ] `docs/project-status.md` updated if project state changed.
+## Verification
+
+- [ ] Each acceptance criterion maps to a test or documented manual check
+- [ ] Changed files reviewed in the diff
+- [ ] Tests, type checks, linters, and build pass — exact commands and results recorded
+- [ ] No unrelated changes introduced
+- [ ] Known limitations and deviations documented
+- [ ] Affected documentation updated or flagged for Workflow 10
+
+**Final Status**
+
+```text
+Ready for testing and independent review: YES / NO
+Commands run and results:
+Unticked items and reasons:
+Deviations / limitations:
+```
